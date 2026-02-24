@@ -43,4 +43,4 @@ Platform: NAIRR Jetstream2 JupyterHub instance (use instance compute/storage).
 - If a requirements.txt exists, prefer: `pip install -r requirements.txt`
 - Always edit the top cells in each notebook to set DATA_DIR, OUTPUT_DIR, MEGADETECTOR_PATH, and MODEL_FILE before running.
 - For GPU usage, install GPU‑compatible TensorFlow or PyTorch per your CUDA/cuDNN and OS setup.
-- If you want, I can produce per-notebook requirements.txt entries or exact pip/conda commands for each environment.
+
