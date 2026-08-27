@@ -1,0 +1,4 @@
+# Strip notebook outputs/execution counts before they hit git history.
+# Requires nbstripout installed and activated locally (see README.md "Notebook conventions").
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
