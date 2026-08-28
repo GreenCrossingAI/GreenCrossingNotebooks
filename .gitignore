@@ -1,2 +1,6 @@
 # Private local working notes — never committed
 FIELD_NOTES.md
+
+# Generated notebook run output — not source, shouldn't be committed
+megadetector_outputs/
+.ipynb_checkpoints/
