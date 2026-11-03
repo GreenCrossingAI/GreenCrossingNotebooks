@@ -20,6 +20,8 @@ Each platform has two notebooks: one for video, one for still images.
 | Windows / Tarazed | `Notebooks/windows/Video_Processing_Windows_2026.ipynb` | `Notebooks/windows/BatchProcessing_with_filedialog.ipynb` |
 | Linux / JupyterHub | `Notebooks/linux/Batch-Video_Processing_2026.ipynb` | `Notebooks/linux/BatchProcessing_with_filedialog.ipynb`¹ |
 
+Both video notebooks skip videos with no animal detections, but their output videos differ on purpose: the Windows notebook writes an **animal-only highlight reel** (only frames with an animal, with boxes), while the Linux notebook writes the **full video** with boxes on the animal frames. Both use a confidence threshold of 0.2, Dan Morris's recommended default for the MDv5a model.
+
 The Windows notebooks pick folders with `tkinter` file-picker dialogs, which need a display. The Linux notebooks are headless: paths are hardcoded in their top cells instead.
 
 ¹ Despite the name, the Linux images notebook has no file dialogs; it was adapted from the Windows one with the dialogs replaced by hardcoded paths.
@@ -119,4 +121,4 @@ A shadowed install upgrades without error and without visibly changing anything,
 
 - The video notebooks load the model once and call MegaDetector's Python API in-process. The images notebooks run it as a command; when you do that, invoke it via `subprocess.run([sys.executable, "-m", "megadetector...", ...])`, not a bare `python` or `!python`. A bare interpreter name can resolve to a different Python than the one running the notebook (e.g. an old 3.8 env still on `PATH`), which shows up as `ModuleNotFoundError: megadetector` even though the package is installed correctly in the kernel's own environment.
 
-- The Windows video notebook (and its headless copy) skips a video that fails rather than halting the run, and lists skipped videos by filename in the summary instead of silently dropping them. If you're extending that batch loop, preserve this behavior. The Linux video notebook does not do this yet: a failed `ffmpeg` extraction or a video that yields no frames stops the whole run.
+- The Windows video notebook (and its headless copy) skips a video that fails rather than halting the run. The summary lists failed videos separately from videos with no animals, with the reason for each failure, so a broken video isn't mistaken for an empty one. If you're extending that batch loop, preserve this behavior. The Linux video notebook does not do this yet: a failed `ffmpeg` extraction or a video that yields no frames stops the whole run.
